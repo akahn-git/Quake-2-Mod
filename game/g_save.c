@@ -202,6 +202,45 @@ void InitGame (void)
 	// dm map list
 	sv_maplist = gi.cvar ("sv_maplist", "", 0);
 
+	//alex
+	weather = gi.cvar("weather", "0", 0);
+	pole = gi.cvar("pole", "0", 0);
+	hook = gi.cvar("hook", "0", 0);
+	reel = gi.cvar("reel", "0", 0);
+	weight = gi.cvar("weight", "0", 0);
+	tackle = gi.cvar("tackle", "0", 0);
+	bait = gi.cvar("bait", "0", 0);
+
+	maxpole = gi.cvar("maxpole", "0", 0);
+	maxhook = gi.cvar("maxhook", "0", 0);
+	maxreel = gi.cvar("maxreel", "0", 0);
+	maxweight = gi.cvar("maxweight", "0", 0);
+	maxtackle = gi.cvar("maxtackle", "0", 0);
+	maxbait = gi.cvar("maxbait", "0", 0);
+
+	ministart = gi.cvar("ministart", "0", 0);
+	minitime = gi.cvar("minitime", "0", 0);
+	minicur = gi.cvar("minicur", "0", 0);
+	minifish = gi.cvar("minifish", "0", 0);
+	minifishspecific = gi.cvar("minifishspecific", "-1", 0);
+	minireel = gi.cvar("minireel", "0", 0);
+	minidist = gi.cvar("minidist", "0", 0);
+
+	mackerel = gi.cvar("mackerel", "0", 0);
+	cod = gi.cvar("cod", "0", 0);
+	swordfish = gi.cvar("swordfish", "0", 0);
+	hammerhead = gi.cvar("hammerhead", "0", 0);
+	rainbowfish = gi.cvar("rainbowfish", "0", 0);
+
+	olocation = gi.cvar("olocation", "1",0);
+	pulls = gi.cvar("pulls", "0", 0);
+	fishpulls = gi.cvar("fishpulls", "0", 0);
+
+	page = gi.cvar("page", "1", 0);
+	minipage = gi.cvar("minipage", "1", 0);
+
+	moddedgame = gi.cvar("moddedgame", "1", 0);
+
 	// items
 	InitItems ();
 
@@ -219,6 +258,7 @@ void InitGame (void)
 	game.maxclients = maxclients->value;
 	game.clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
 	globals.num_edicts = game.maxclients+1;
+	
 }
 
 //=========================================================

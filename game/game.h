@@ -72,6 +72,7 @@ typedef struct edict_s edict_t;
 typedef struct gclient_s gclient_t;
 
 
+
 #ifndef GAME_INCLUDE
 
 struct gclient_s
@@ -120,6 +121,7 @@ struct edict_s
 //
 typedef struct
 {
+
 	// special messages
 	void	(*bprintf) (int printlevel, char *fmt, ...);
 	void	(*dprintf) (char *fmt, ...);
@@ -250,5 +252,6 @@ typedef struct
 	int			num_edicts;		// current number, <= max_edicts
 	int			max_edicts;
 } game_export_t;
+
 
 game_export_t *GetGameApi (game_import_t *import);

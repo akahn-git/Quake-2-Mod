@@ -882,7 +882,7 @@ void	SelectSpawnPoint (edict_t *ent, vec3_t origin, vec3_t angles)
 		spot = SelectCoopSpawnPoint (ent);
 
 	// find a single player start spot
-	if (!spot)
+	else if (!spot)
 	{
 		while ((spot = G_Find (spot, FOFS(classname), "info_player_start")) != NULL)
 		{

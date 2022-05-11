@@ -106,6 +106,16 @@ typedef enum
 	AMMO_SLUGS
 } ammo_t;
 
+//grapple
+
+#define CTF_GRAPPLE_SPEED					650 // speed of grapple in flight
+#define CTF_GRAPPLE_PULL_SPEED				650	// speed player is pulled at
+
+typedef enum {
+	CTF_GRAPPLE_STATE_FLY,
+	CTF_GRAPPLE_STATE_PULL,
+	CTF_GRAPPLE_STATE_HANG
+} ctfgrapplestate_t;
 
 //deadflag
 #define DEAD_NO					0
@@ -230,6 +240,7 @@ typedef struct
 #define WEAP_HYPERBLASTER		9 
 #define WEAP_RAILGUN			10
 #define WEAP_BFG				11
+#define WEAP_GRAPPLE			12
 
 typedef struct gitem_s
 {
@@ -338,6 +349,7 @@ typedef struct
 	int			body_que;			// dead bodies
 
 	int			power_cubes;		// ugly necessity for coop
+
 } level_locals_t;
 
 
@@ -549,6 +561,45 @@ extern	cvar_t	*flood_persecond;
 extern	cvar_t	*flood_waitdelay;
 
 extern	cvar_t	*sv_maplist;
+
+//added
+extern cvar_t	*instantweap;
+extern cvar_t	*weather;
+extern cvar_t	*pole;
+extern cvar_t	*hook;
+extern cvar_t	*reel;
+extern cvar_t	*weight;
+extern cvar_t	*tackle;
+extern cvar_t	*bait;
+
+extern cvar_t* maxpole;
+extern cvar_t* maxhook;
+extern cvar_t* maxreel;
+extern cvar_t* maxweight;
+extern cvar_t* maxtackle;
+extern cvar_t* maxbait;
+
+extern cvar_t* ministart;
+extern cvar_t* minitime;
+extern cvar_t* minicur;
+extern cvar_t* minifish;
+extern cvar_t* minifishspecific;
+extern cvar_t* minireel;
+extern cvar_t* minidist;
+
+extern cvar_t* mackerel;
+extern cvar_t* cod;
+extern cvar_t* swordfish;
+extern cvar_t* hammerhead;
+extern cvar_t* rainbowfish;
+
+extern cvar_t* olocation;
+extern cvar_t* fishpulls;
+extern cvar_t* pulls;
+
+extern cvar_t* page;
+extern cvar_t* minipage;
+extern cvar_t* moddedgame;
 
 #define world	(&g_edicts[0])
 
@@ -814,6 +865,12 @@ void ChaseNext(edict_t *ent);
 void ChasePrev(edict_t *ent);
 void GetChaseTarget(edict_t *ent);
 
+// GRAPPLE
+void CTFWeapon_Grapple(edict_t* ent);
+void CTFPlayerResetGrapple(edict_t* ent);
+void CTFGrapplePull(edict_t* self);
+void CTFResetGrapple(edict_t* self);
+
 //============================================================================
 
 // client_t->anim_priority
@@ -824,6 +881,9 @@ void GetChaseTarget(edict_t *ent);
 #define	ANIM_ATTACK		4
 #define	ANIM_DEATH		5
 #define	ANIM_REVERSE	6
+
+//grapple
+#define MOD_GRAPPLE			34
 
 
 // client data that stays across multiple level loads
@@ -893,6 +953,22 @@ struct gclient_s
 	qboolean	showhelp;
 	qboolean	showhelpicon;
 
+	//alex specific shows
+	qboolean	showmini;	//show the minigame
+	qboolean	timerstarted; //tells if the timer needs to be set
+	qboolean	wonmini;	//tells if the mini game has been won
+	qboolean	miniover;	//tells if the mini game is over
+	qboolean	showbuy;	//show the buy menu
+	qboolean	showinfo; //show the information menu
+	qboolean	showend; //show the mini game end screen
+	qboolean    showstart; //show the start screen of the mini game
+	qboolean	graphit; //grapple hit the water
+	qboolean    grapuse; //grapple is in use
+
+	vec3_t*		grapstart;//start point of grapple
+	vec3_t*		grapend;//end of grapple
+	edict_t*	grapcur;// the current grapple object
+
 	int			ammo_index;
 
 	int			buttons;
@@ -957,8 +1033,15 @@ struct gclient_s
 
 	float		respawn_time;		// can respawn when time > this
 
-	edict_t		*chase_target;		// player we are chasing
-	qboolean	update_chase;		// need to update chase info?
+	//ZOID
+	void		* ctf_grapple;		// entity of grapple
+	int			ctf_grapplestate;		// true if pulling
+	float		ctf_grapplereleasetime;	// time of grapple release
+	float		ctf_regentime;		// regen tech
+	float		ctf_techsndtime;
+	float		ctf_lasttechmsg;
+	edict_t* chase_target;
+	qboolean	update_chase;
 };
 
 
@@ -1050,6 +1133,10 @@ struct edict_s
 	float		damage_debounce_time;
 	float		fly_sound_debounce_time;	//move to clientinfo
 	float		last_move_time;
+
+	//alex
+	int			cash;
+	int			maxcash;
 
 	int			health;
 	int			max_health;

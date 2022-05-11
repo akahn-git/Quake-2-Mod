@@ -71,6 +71,49 @@ cvar_t	*flood_waitdelay;
 
 cvar_t	*sv_maplist;
 
+//alex
+cvar_t	*instantweap;
+cvar_t	*weather;
+cvar_t	*pole;
+cvar_t	*hook;
+cvar_t	*reel;
+cvar_t	*weight;
+cvar_t	*tackle;
+cvar_t	*bait;
+
+//alex
+cvar_t* ministart;
+cvar_t* minitime;
+cvar_t* minicur;
+cvar_t* minifish;
+cvar_t* minifishspecific;
+cvar_t* minireel;
+cvar_t* minidist;
+
+//alex not used
+cvar_t* mackerel;
+cvar_t* cod;
+cvar_t* swordfish;
+cvar_t* hammerhead;
+cvar_t* rainbowfish;
+
+//alex
+cvar_t	*maxpole;
+cvar_t	*maxreel;
+cvar_t	*maxhook;
+cvar_t	*maxweight;
+cvar_t	*maxbait;
+cvar_t	*maxtackle;
+
+cvar_t	*olocation;
+cvar_t* fishpulls;
+cvar_t  *pulls;
+
+cvar_t *page;
+cvar_t* minipage;
+
+cvar_t* moddedgame;
+
 void SpawnEntities (char *mapname, char *entities, char *spawnpoint);
 void ClientThink (edict_t *ent, usercmd_t *cmd);
 qboolean ClientConnect (edict_t *ent, char *userinfo);
