@@ -1,6 +1,10 @@
 # Quake-2-Mod
 My Quake 2 Final Project
 
+If you are sick of running and gunning through quake2 this is the mod for you. All enemies are frozen, and so are you! 
+You wont be able to move but type in 'fish' into the command prompt to start the fishing mod
+You will be placed on your perch where you can fish peacefully.
+
 Common Deliverables
 
 O Shortcut that Auto-Launches your Mod 
